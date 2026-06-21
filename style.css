@@ -1,0 +1,33 @@
+.stMetric {
+    background-color: #f0f2f6;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+}
+
+.stButton > button {
+    background-color: #667eea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.stButton > button:hover {
+    background-color: #764ba2;
+}
+
+.stTabs [data-baseweb="tab-list"] {
+    gap: 5px;
+}
+
+.stTabs [data-baseweb="tab"] {
+    padding: 10px 20px;
+    background-color: #f0f2f6;
+    border-radius: 5px 5px 0 0;
+}
+
+[data-testid="stSelectbox"] {
+    background-color: white;
+}
