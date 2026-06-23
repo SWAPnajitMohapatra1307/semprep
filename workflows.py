@@ -7,10 +7,12 @@ from datastore import save_subject_data, load_subject_data, save_session, get_we
 
 TEMP_DIR = "temp_extracted"
 
+
 def cleanup_temp():
     if os.path.exists(TEMP_DIR):
         shutil.rmtree(TEMP_DIR)
     Path(TEMP_DIR).mkdir(parents=True, exist_ok=True)
+
 
 def get_pyq_texts(subject_bucket: dict) -> list:
     pyq_texts = []
@@ -19,6 +21,7 @@ def get_pyq_texts(subject_bucket: dict) -> list:
         if text:
             pyq_texts.append(text)
     return pyq_texts
+
 
 def get_notes_texts(subject_bucket: dict) -> list:
     notes_texts = []
@@ -31,6 +34,7 @@ def get_notes_texts(subject_bucket: dict) -> list:
         if text:
             notes_texts.append(text)
     return notes_texts
+
 
 def estimate_total_years(pyq_texts: list) -> int:
     import re
@@ -47,6 +51,7 @@ def run_subject_workflow(subject: str, subject_bucket: dict, days_remaining: int
     if not force_rerun:
         existing = load_subject_data(subject)
         if existing:
+            print(f"Loaded {subject} from cache")
             return {
                 "status": "loaded_from_cache",
                 "subject": subject,
@@ -55,22 +60,32 @@ def run_subject_workflow(subject: str, subject_bucket: dict, days_remaining: int
 
     pyq_texts = get_pyq_texts(subject_bucket)
 
-    if not pyq_texts:
+    all_texts = []
+    for ftype in ["PYQ", "Notes", "Reference", "Unknown"]:
+        for file_data in subject_bucket.get(ftype, []):
+            text = file_data.get("raw_text", "")
+            if text.strip():
+                all_texts.append(text)
+
+    if not all_texts:
         return {
             "status": "error",
             "subject": subject,
-            "error": "No PYQ files found for this subject. Please upload question papers."
+            "error": f"No readable files found for {subject}"
         }
 
-    total_years = estimate_total_years(pyq_texts)
+    total_years = estimate_total_years(pyq_texts) if pyq_texts else 1
     weak_topics = get_weak_topics(subject)
+
+    print(f"Running analysis for {subject}: {len(all_texts)} total files, {len(pyq_texts)} PYQs, {total_years} years")
 
     analysis_result = run_full_analysis(
         subject=subject,
         pyq_texts=pyq_texts,
         total_years=total_years,
         days_remaining=days_remaining,
-        weak_topics=weak_topics
+        weak_topics=weak_topics,
+        all_texts=all_texts
     )
 
     save_subject_data(subject, analysis_result)
@@ -84,6 +99,7 @@ def run_subject_workflow(subject: str, subject_bucket: dict, days_remaining: int
 def run_full_pipeline(zip_path: str, days_remaining: int, selected_subjects: list = None, force_rerun: bool = False) -> dict:
     cleanup_temp()
 
+    print("Extracting ZIP and detecting subjects per file...")
     subject_buckets = process_upload(zip_path, TEMP_DIR)
 
     if not subject_buckets:
@@ -96,13 +112,22 @@ def run_full_pipeline(zip_path: str, days_remaining: int, selected_subjects: lis
     if selected_subjects:
         subject_buckets = {k: v for k, v in subject_buckets.items() if k in selected_subjects}
 
+    subject_buckets.pop("Unknown", None)
+
+    if not subject_buckets:
+        return {
+            "status": "error",
+            "error": "Could not detect any known subjects. Check filenames or content.",
+            "results": {}
+        }
+
+    print(f"Subjects detected: {list(subject_buckets.keys())}")
+
     results = {}
     errors = {}
 
     for subject, bucket in subject_buckets.items():
-        if subject == "Unknown":
-            continue
-
+        print(f"Processing subject: {subject}")
         result = run_subject_workflow(
             subject=subject,
             subject_bucket=bucket,
@@ -132,6 +157,7 @@ def run_full_pipeline(zip_path: str, days_remaining: int, selected_subjects: lis
         "subjects_processed": list(results.keys())
     }
 
+
 def regenerate_cheatsheet_workflow(subject: str, days_remaining: int) -> str:
     from agent import generate_cheatsheet
     from datastore import get_weak_topics, load_subject_data, save_subject_data
@@ -151,8 +177,8 @@ def regenerate_cheatsheet_workflow(subject: str, days_remaining: int) -> str:
 
     data["cheatsheet"] = new_cheatsheet
     save_subject_data(subject, data)
-
     return new_cheatsheet
+
 
 def regenerate_study_plan_workflow(subject: str, days_remaining: int) -> str:
     from agent import generate_study_plan
@@ -172,8 +198,8 @@ def regenerate_study_plan_workflow(subject: str, days_remaining: int) -> str:
 
     data["study_plan"] = new_plan
     save_subject_data(subject, data)
-
     return new_plan
+
 
 def get_subject_summary(subject: str) -> dict:
     from datastore import load_subject_data, load_progress
@@ -195,8 +221,10 @@ def get_subject_summary(subject: str) -> dict:
     weighted_topics = data.get("weighted_topics", {})
     topics_list = []
 
-    if isinstance(weighted_topics, dict) and "weighted_topics" in weighted_topics:
-        topics_list = weighted_topics["weighted_topics"]
+    if isinstance(weighted_topics, dict):
+        topics_list = weighted_topics.get("weighted_topics") or weighted_topics.get("topics") or []
+    elif isinstance(weighted_topics, list):
+        topics_list = weighted_topics
 
     critical = [t for t in topics_list if t.get("weight", 0) >= 9]
     high = [t for t in topics_list if 7 <= t.get("weight", 0) < 9]

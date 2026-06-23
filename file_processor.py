@@ -5,22 +5,23 @@ import fitz
 import pytesseract
 from pathlib import Path
 from PIL import Image
+from collections import defaultdict
 from config import TESSERACT_PATH
 
 pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
 
 SUBJECT_KEYWORDS = {
-    "CN": ["network", "tcp", "ip", "routing", "osi", "protocol", "ethernet", "subnet", "dns", "http", "cn", "computer network"],
-    "ML": ["machine learning", "neural", "regression", "classification", "clustering", "svm", "decision tree", "ml", "gradient", "epoch"],
-    "Python": ["python", "def ", "class ", "pandas", "numpy", "flask", "django", "list comprehension", "lambda"],
-    "Database": ["sql", "dbms", "normalization", "er diagram", "transaction", "acid", "join", "query", "relational", "database"],
-    "DOS": ["operating system", "process", "thread", "scheduling", "deadlock", "memory management", "dos", "semaphore", "paging"],
-    "C": ["pointer", "malloc", "struct", "printf", "scanf", "array", "linked list", "c programming", "#include"],
+    "CN": ["network", "tcp", "ip", "routing", "osi", "protocol", "ethernet", "subnet", "dns", "http", "cn", "computer network", "data link", "mac address", "topology", "switching"],
+    "ML": ["machine learning", "neural", "regression", "classification", "clustering", "svm", "decision tree", "gradient", "epoch", "supervised", "unsupervised", "naive bayes", "random forest"],
+    "Python": ["python", "def ", "class ", "pandas", "numpy", "flask", "django", "list comprehension", "lambda", "tuple", "dictionary", "iterator"],
+    "Database": ["sql", "dbms", "normalization", "er diagram", "transaction", "acid", "join", "query", "relational", "database", "primary key", "foreign key", "index", "trigger"],
+    "DOS": ["operating system", "process", "thread", "scheduling", "deadlock", "memory management", "semaphore", "paging", "segmentation", "virtual memory", "dos"],
+    "C": ["pointer", "malloc", "struct", "printf", "scanf", "linked list", "c programming", "#include", "array", "recursion", "stack", "queue"],
 }
 
 FILE_TYPE_KEYWORDS = {
-    "PYQ": ["question paper", "q.p", "qp", "mid sem", "end sem", "university exam", "examination", "2019", "2020", "2021", "2022", "2023", "2024"],
-    "Notes": ["notes", "lecture", "unit", "chapter", "handwritten", "module"],
+    "PYQ": ["question paper", "q.p", "qp", "mid sem", "end sem", "university exam", "examination", "2019", "2020", "2021", "2022", "2023", "2024", "marks", "answer all"],
+    "Notes": ["notes", "lecture", "unit", "chapter", "handwritten", "module", "syllabus"],
     "Reference": ["reference", "textbook", "solution", "assignment"],
 }
 
@@ -49,18 +50,16 @@ def ocr_pdf_with_tesseract(pdf_path: str, max_pages: int = 2) -> str:
     doc = fitz.open(pdf_path)
     total_pages = len(doc)
     pages_to_scan = min(total_pages, max_pages)
-    
     all_text = []
-    
+
     for i in range(pages_to_scan):
         page = doc[i]
         pix = page.get_pixmap(dpi=150)
         img_bytes = pix.tobytes("png")
-        
         image = Image.open(io.BytesIO(img_bytes))
         text = pytesseract.image_to_string(image)
         all_text.append(text)
-    
+
     doc.close()
     return "\n\n".join(all_text)
 
@@ -95,9 +94,7 @@ def detect_file_type(filename: str, text_sample: str) -> str:
     return best
 
 
-def process_file(file_path: str) -> dict:
-    import io
-    
+def process_single_file(file_path: str) -> dict:
     file_path = Path(file_path)
     extension = file_path.suffix.lower()
     filename = file_path.name
@@ -142,29 +139,29 @@ def process_file(file_path: str) -> dict:
 
 def process_upload(zip_path: str, extract_dir: str) -> dict:
     all_files = extract_zip(zip_path, extract_dir)
-    
-    subject_buckets = {}
+
+    subject_buckets = defaultdict(lambda: {
+        "PYQ": [],
+        "Notes": [],
+        "Reference": [],
+        "Unknown": []
+    })
 
     for file_path in all_files:
         ext = Path(file_path).suffix.lower()
         if ext not in [".pdf", ".jpg", ".jpeg", ".png", ".txt"]:
             continue
-        
-        processed = process_file(file_path)
-        
+
+        processed = process_single_file(file_path)
+
         subject = processed["subject"]
-        if subject not in subject_buckets:
-            subject_buckets[subject] = {
-                "PYQ": [],
-                "Notes": [],
-                "Reference": [],
-                "Unknown": []
-            }
-        
         file_type = processed["file_type"]
+
         if file_type not in subject_buckets[subject]:
             file_type = "Unknown"
-        
+
         subject_buckets[subject][file_type].append(processed)
 
-    return subject_buckets
+        print(f"File: {processed['filename']} → Subject: {subject} | Type: {file_type} | OCR: {processed['ocr_used']}")
+
+    return dict(subject_buckets)
