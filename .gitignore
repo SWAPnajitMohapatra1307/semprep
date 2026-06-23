@@ -1,6 +1,18 @@
-.env
+# Virtual environment
 venv/
+.env
+
+# Python cache
 __pycache__/
-outputs/
 *.pyc
-.DS_Store/
+
+# OS files
+.DS_Store
+
+# SEMPREP generated data
+semprep_data/
+temp_extracted/
+outputs/
+
+# Debug files
+debugcheck.py
