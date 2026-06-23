@@ -1,13 +1,12 @@
 {
   "subject": "CN",
   "weak_topics": [
-    "Error Detection and Correction",
     "Data Link Layer Protocols"
   ],
   "mastered_topics": [
-    "Transmission Theory",
-    "Network Classification"
+    "Network Classification",
+    "Transmission Media"
   ],
   "skipped_topics": [],
-  "last_updated": "2026-06-22T19:49:12.012718"
+  "last_updated": "2026-06-23T16:52:14.692899"
 }

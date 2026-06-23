@@ -1,12 +1,11 @@
 {
   "zip_path": "temp_uploaded.zip",
-  "days_remaining": 5,
+  "days_remaining": 7,
   "subjects_processed": [
-    "CN"
-  ],
-  "subjects_failed": [
+    "CN",
     "C",
     "DOS"
   ],
+  "subjects_failed": [],
   "selected_subjects": null
 }

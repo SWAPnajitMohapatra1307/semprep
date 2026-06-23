@@ -1,68 +1,118 @@
 {
   "subject": "CN",
-  "last_updated": "2026-06-22T11:46:49.062738",
+  "last_updated": "2026-06-23T12:14:27.501251",
   "topic_map": {
     "subject": "CN",
+    "has_pyqs": true,
     "topics": [
       {
         "topic_name": "Network Classification",
         "questions": [
-          "Classify networks based on geographical area.",
-          "Explain the differences between LAN, MAN, and WAN."
+          {
+            "text": "Classify networks based on geographical area (LAN, MAN, WAN)",
+            "pyq_years": [
+              "2022"
+            ],
+            "marks": 5
+          },
+          {
+            "text": "Explain the characteristics of different types of networks",
+            "pyq_years": [],
+            "marks": 5
+          }
         ],
         "years_appeared": [
-          "2022",
-          "2023"
+          "2022"
         ],
-        "typical_marks": 6,
+        "typical_marks": 5,
         "unit": "Unit 1"
       },
       {
         "topic_name": "Data Link Layer Protocols",
         "questions": [
-          "Explain the different services that the Data Link Layer provides to the Network Layer.",
-          "What are the key components of an optical transmission system?"
+          {
+            "text": "Explain the essential difference between circuit switching and packet switching",
+            "pyq_years": [
+              "2023"
+            ],
+            "marks": 6
+          },
+          {
+            "text": "Discuss various Data Link layer design issues",
+            "pyq_years": [],
+            "marks": 5
+          }
         ],
         "years_appeared": [
           "2023"
         ],
-        "typical_marks": 8,
+        "typical_marks": 6,
         "unit": "Unit 2"
       },
       {
-        "topic_name": "Transmission Theory",
+        "topic_name": "Transmission Media",
         "questions": [
-          "Calculate the time taken to transmit an image over different bandwidths.",
-          "Explain why the refractive index of cladding is less than that of core in an optical fiber cable."
+          {
+            "text": "What are the key components of an optical transmission system?",
+            "pyq_years": [
+              "2023"
+            ],
+            "marks": 2
+          },
+          {
+            "text": "State the advantages of optical fiber over coaxial cable",
+            "pyq_years": [],
+            "marks": 2
+          }
         ],
         "years_appeared": [
           "2023"
         ],
-        "typical_marks": 10,
+        "typical_marks": 2,
         "unit": "Unit 3"
       },
       {
-        "topic_name": "Error Detection and Correction",
+        "topic_name": "Network Performance Metrics",
         "questions": [
-          "Identify and correct the error bit in the received code using even parity Hamming code.",
-          "How many check bits are needed to ensure that the receiver can detect and correct single bit errors?"
+          {
+            "text": "Calculate the time taken to transmit an image over different bandwidths",
+            "pyq_years": [
+              "2023"
+            ],
+            "marks": 6
+          },
+          {
+            "text": "Explain the concept of bandwidth and its impact on network performance",
+            "pyq_years": [],
+            "marks": 5
+          }
         ],
         "years_appeared": [
           "2023"
         ],
-        "typical_marks": 8,
+        "typical_marks": 6,
         "unit": "Unit 4"
       },
       {
-        "topic_name": "Algorithms and Combinatorics",
+        "topic_name": "Network Protocols",
         "questions": [
-          "Apply the knowledge of fundamental algorithms to generate permutations and combinations.",
-          "State and prove the Strong form of Pigeonhole Principle."
+          {
+            "text": "Outline the principal difference between connectionless and connection-oriented communication",
+            "pyq_years": [
+              "2023"
+            ],
+            "marks": 2
+          },
+          {
+            "text": "Give examples of protocols for both connectionless and connection-oriented communication",
+            "pyq_years": [],
+            "marks": 3
+          }
         ],
         "years_appeared": [
-          "2022"
+          "2023"
         ],
-        "typical_marks": 6,
+        "typical_marks": 2,
         "unit": "Unit 5"
       }
     ]
@@ -71,80 +121,134 @@
     "weighted_topics": [
       {
         "topic_name": "Network Classification",
-        "weight": 8.4,
-        "band": "HIGH",
-        "years_appeared": [
-          "2022",
-          "2023"
-        ],
-        "typical_marks": 6,
-        "unit": "Unit 1",
-        "questions": [
-          "Classify networks based on geographical area.",
-          "Explain the differences between LAN, MAN, and WAN."
-        ]
-      },
-      {
-        "topic_name": "Data Link Layer Protocols",
-        "weight": 7.6,
-        "band": "HIGH",
-        "years_appeared": [
-          "2023"
-        ],
-        "typical_marks": 8,
-        "unit": "Unit 2",
-        "questions": [
-          "Explain the different services that the Data Link Layer provides to the Network Layer.",
-          "What are the key components of an optical transmission system?"
-        ]
-      },
-      {
-        "topic_name": "Transmission Theory",
-        "weight": 8.0,
-        "band": "HIGH",
-        "years_appeared": [
-          "2023"
-        ],
-        "typical_marks": 10,
-        "unit": "Unit 3",
-        "questions": [
-          "Calculate the time taken to transmit an image over different bandwidths.",
-          "Explain why the refractive index of cladding is less than that of core in an optical fiber cable."
-        ]
-      },
-      {
-        "topic_name": "Error Detection and Correction",
-        "weight": 7.6,
-        "band": "HIGH",
-        "years_appeared": [
-          "2023"
-        ],
-        "typical_marks": 8,
-        "unit": "Unit 4",
-        "questions": [
-          "Identify and correct the error bit in the received code using even parity Hamming code.",
-          "How many check bits are needed to ensure that the receiver can detect and correct single bit errors?"
-        ]
-      },
-      {
-        "topic_name": "Algorithms and Combinatorics",
-        "weight": 5.4,
+        "weight": 6.5,
         "band": "MEDIUM",
         "years_appeared": [
           "2022"
         ],
-        "typical_marks": 6,
-        "unit": "Unit 5",
+        "typical_marks": 5,
+        "unit": "Unit 1",
+        "has_pyq": true,
         "questions": [
-          "Apply the knowledge of fundamental algorithms to generate permutations and combinations.",
-          "State and prove the Strong form of Pigeonhole Principle."
+          {
+            "text": "Classify networks based on geographical area (LAN, MAN, WAN)",
+            "pyq_years": [
+              "2022"
+            ],
+            "marks": 5
+          },
+          {
+            "text": "Explain the characteristics of different types of networks",
+            "pyq_years": [],
+            "marks": 5
+          }
+        ]
+      },
+      {
+        "topic_name": "Data Link Layer Protocols",
+        "weight": 7.5,
+        "band": "HIGH",
+        "years_appeared": [
+          "2023"
+        ],
+        "typical_marks": 6,
+        "unit": "Unit 2",
+        "has_pyq": true,
+        "questions": [
+          {
+            "text": "Explain the essential difference between circuit switching and packet switching",
+            "pyq_years": [
+              "2023"
+            ],
+            "marks": 6
+          },
+          {
+            "text": "Discuss various Data Link layer design issues",
+            "pyq_years": [],
+            "marks": 5
+          }
+        ]
+      },
+      {
+        "topic_name": "Transmission Media",
+        "weight": 5.0,
+        "band": "MEDIUM",
+        "years_appeared": [
+          "2023"
+        ],
+        "typical_marks": 2,
+        "unit": "Unit 3",
+        "has_pyq": true,
+        "questions": [
+          {
+            "text": "What are the key components of an optical transmission system?",
+            "pyq_years": [
+              "2023"
+            ],
+            "marks": 2
+          },
+          {
+            "text": "State the advantages of optical fiber over coaxial cable",
+            "pyq_years": [],
+            "marks": 2
+          }
+        ]
+      },
+      {
+        "topic_name": "Network Performance Metrics",
+        "weight": 7.5,
+        "band": "HIGH",
+        "years_appeared": [
+          "2023"
+        ],
+        "typical_marks": 6,
+        "unit": "Unit 4",
+        "has_pyq": true,
+        "questions": [
+          {
+            "text": "Calculate the time taken to transmit an image over different bandwidths",
+            "pyq_years": [
+              "2023"
+            ],
+            "marks": 6
+          },
+          {
+            "text": "Explain the concept of bandwidth and its impact on network performance",
+            "pyq_years": [],
+            "marks": 5
+          }
+        ]
+      },
+      {
+        "topic_name": "Network Protocols",
+        "weight": 4.5,
+        "band": "LOW",
+        "years_appeared": [
+          "2023"
+        ],
+        "typical_marks": 2,
+        "unit": "Unit 5",
+        "has_pyq": true,
+        "questions": [
+          {
+            "text": "Outline the principal difference between connectionless and connection-oriented communication",
+            "pyq_years": [
+              "2023"
+            ],
+            "marks": 2
+          },
+          {
+            "text": "Give examples of protocols for both connectionless and connection-oriented communication",
+            "pyq_years": [],
+            "marks": 3
+          }
         ]
       }
     ]
   },
-  "priority_list": "| Priority | Topic                       | Weight | Band  | Questions                                                                                                           | Study Time | Notes                                          |\n|----------|-----------------------------|--------|-------|---------------------------------------------------------------------------------------------------------------------|------------|------------------------------------------------|\n| 1        | Network Classification       | 8.4    | HIGH  | Classify networks based on geographical area. (2022, 6m), Explain the differences between LAN, MAN, and WAN. (2023, 6m) | 2 hrs      | Appeared in 2022 and 2023.                    |\n| 2        | Transmission Theory          | 8.0    | HIGH  | Calculate the time taken to transmit an image over different bandwidths. (2023, 10m), Explain why the refractive index of cladding is less than that of core in an optical fiber cable. (2023, 10m) | 3 hrs      | Appeared in 2023.                             |\n| 3        | Error Detection and Correction| 7.6    | HIGH  | Identify and correct the error bit in the received code using even parity Hamming code. (2023, 8m), How many check bits are needed to ensure that the receiver can detect and correct single bit errors? (2023, 8m) | 2 hrs      | Appeared in 2023.                             |\n| 4        | Data Link Layer Protocols    | 7.6    | HIGH  | Explain the different services that the Data Link Layer provides to the Network Layer. (2023, 8m), What are the key components of an optical transmission system? (2023, 8m) | 2 hrs      | Appeared in 2023.                             |\n\n### SKIP THESE TOPICS (weight below threshold):\n- Algorithms and Combinatorics: Only appeared in 2022. Not in recent papers.",
-  "question_bank": "## Network Classification (Weight: 8.4)\n### Q1: Classify networks based on geographical area. (Year: 2022, Marks: 6)\nAnswer outline:\n- Definition of LAN, MAN, and WAN\n- Examples of each type of network\n- Key characteristics and differences\n\n### Q2: Explain the differences between LAN, MAN, and WAN. (Year: 2023, Marks: 6)\nAnswer outline:\n- Definition and scope of each network type\n- Speed and distance comparisons\n- Typical use cases for each network type\n\n---\n\n## Data Link Layer Protocols (Weight: 7.6)\n### Q1: Explain the different services that the Data Link Layer provides to the Network Layer. (Year: 2023, Marks: 8)\nAnswer outline:\n- Framing and addressing\n- Error detection and correction\n- Flow control mechanisms\n\n### Q2: What are the key components of an optical transmission system? (Year: 2023, Marks: 8)\nAnswer outline:\n- Light source (e.g., laser, LED)\n- Optical fiber (core and cladding)\n- Receiver and detection system\n\n---\n\n## Transmission Theory (Weight: 8.0)\n### Q1: Calculate the time taken to transmit an image over different bandwidths. (Year: 2023, Marks: 10)\nAnswer outline:\n- Formula for transmission time (Time = Size/Bandwidth)\n- Example calculation with given image size and bandwidths\n- Discussion on factors affecting transmission time\n\n### Q2: Explain why the refractive index of cladding is less than that of core in an optical fiber cable. (Year: 2023, Marks: 10)\nAnswer outline:\n- Definition of refractive index\n- Total internal reflection principle\n- Importance for signal transmission in optical fibers\n\n---\n\n## Error Detection and Correction (Weight: 7.6)\n### Q1: Identify and correct the error bit in the received code using even parity Hamming code. (Year: 2023, Marks: 8)\nAnswer outline:\n- Explanation of even parity and Hamming code\n- Step-by-step error detection process\n- Correction of identified error bit\n\n### Q2: How many check bits are needed to ensure that the receiver can detect and correct single bit errors? (Year: 2023, Marks: 8)\nAnswer outline:\n- Formula for calculating check bits (2^r >= m + r + 1)\n- Explanation of variables (m = data bits, r = check bits)\n- Example calculation for a given number of data bits\n\n---\n\n## Algorithms and Combinatorics (Weight: 5.4)\n### Q1: Apply the knowledge of fundamental algorithms to generate permutations and combinations. (Year: 2022, Marks: 6)\nAnswer outline:\n- Definitions of permutations and combinations\n- Formulas for calculating permutations (n!) and combinations (nCr)\n- Example problems demonstrating both concepts\n\n### Q2: State and prove the Strong form of Pigeonhole Principle. (Year: 2022, Marks: 6)\nAnswer outline:\n- Statement of the Strong form of Pigeonhole Principle\n- Explanation of its implications\n- Proof using mathematical induction or contradiction",
-  "flashcards": "---\nTOPIC: Network Classification  \nFRONT: Classify networks based on geographical area.  \nBACK: LAN (Local Area Network), MAN (Metropolitan Area Network), WAN (Wide Area Network)  \nMEMORY HOOK: Large Men Walk  \nDIFFICULTY: Medium  \n---\n\n---\nTOPIC: Data Link Layer Protocols  \nFRONT: Explain the different services that the Data Link Layer provides to the Network Layer.  \nBACK: Framing, Physical Addressing, Error Detection and Correction, Flow Control, Access Control  \nMEMORY HOOK: FPEAF - Framing Provides Error Access Flow  \nDIFFICULTY: Medium  \n---\n\n---\nTOPIC: Transmission Theory  \nFRONT: Calculate the time taken to transmit an image over different bandwidths.  \nBACK: Time = Size of Image / Bandwidth  \nMEMORY HOOK: Time Size Bandwidth  \nDIFFICULTY: Hard  \n---\n\n---\nTOPIC: Error Detection and Correction  \nFRONT: Identify and correct the error bit in the received code using even parity Hamming code.  \nBACK: Use the parity check matrix to find the error bit position and flip it.  \nMEMORY HOOK: Even Parity Hamming - Error Bit Flip  \nDIFFICULTY: Hard  \n---",
-  "study_plan": "## Day 1\n- **Network Classification (Weight: 8.4)** - 2 hours\n  - Focus: Classify networks based on geographical area, differences between LAN, MAN, and WAN.\n  - PYQ: 2022 (6 marks), 2023 (6 marks)\n\n## Day 2\n- **Data Link Layer Protocols (Weight: 7.6)** - 2 hours\n  - Focus: Services provided by the Data Link Layer to the Network Layer, key components of an optical transmission system.\n  - PYQ: 2023 (8 marks)\n\n- **Error Detection and Correction (Weight: 7.6)** - 2 hours\n  - Focus: Identify and correct error bits using even parity Hamming code, number of check bits for single bit error detection and correction.\n  - PYQ: 2023 (8 marks)\n\n## Day 3\n- **Transmission Theory (Weight: 8.0)** - 2 hours\n  - Focus: Calculate transmission time over different bandwidths, refractive index differences in optical fiber cables.\n  - PYQ: 2023 (10 marks)\n\n## Day 4\n- **Algorithms and Combinatorics (Weight: 5.4)** - 2 hours\n  - Focus: Generate permutations and combinations, Strong form of Pigeonhole Principle.\n  - PYQ: 2022 (6 marks)\n\n## Day 5\n- **Revision** - 2 hours\n  - Review all critical and high-weight topics, practice PYQs.",
-  "cheatsheet": "## CRITICAL TOPICS\n\n### Network Classification (Weight: 8.4)\n- Classifies networks: LAN, MAN, WAN based on geographical area.\n- Memory hook: **L**ocal, **M**etropolitan, **W**ide.\n\n### Data Link Layer Protocols (Weight: 7.6)\n- Provides services: framing, error detection, flow control.\n- Memory hook: **F**low, **E**rror, **F**raming.\n\n### Transmission Theory (Weight: 8.0)\n- Time = Data Size / Bandwidth.\n- Memory hook: **T**ime = **D**ata / **B**andwidth.\n\n### Error Detection and Correction (Weight: 7.6)\n- Hamming code: Corrects single-bit errors.\n- Memory hook: **E**ven parity for **E**rror detection.\n\n## WEAK TOPICS (Extra Focus)\n\n### Algorithms and Combinatorics\n- Fundamental algorithms for permutations and combinations.\n- Common exam tricks: Watch for factorials in permutations."
+  "priority_list": "| Priority | Topic                     | Weight | Band   | Questions                                                                                     | Study Time | Notes                                           |\n|----------|---------------------------|--------|--------|-----------------------------------------------------------------------------------------------|------------|-------------------------------------------------|\n| 1        | Data Link Layer Protocols  | 7.5    | HIGH   | Q1(2023, 6m)                                                                                 | 2 hrs      | Important for understanding network operations.  |\n| 2        | Network Performance Metrics | 7.5    | HIGH   | Q1(2023, 6m)                                                                                 | 2 hrs      | Critical for performance analysis.               |\n| 3        | Network Classification      | 6.5    | MEDIUM | Q1(2022, 5m)                                                                                 | 1.5 hrs    | Basic concepts of network types.                 |\n\nSKIP THESE TOPICS (weight below threshold):\n- Transmission Media: Weight is 5.0, only appeared in 2023 with low marks.\n- Network Protocols: Weight is 4.5, low value and only appeared in 2023.",
+  "question_bank": "### Data Link Layer Protocols (Weight: 7.5 | Band: HIGH)\n\n**Q1 (2 marks):** Explain the essential difference between circuit switching and packet switching.  \n**Answer:**\n- Circuit Switching: dedicated path\n- Packet Switching: data packets, shared path\n\n**Q2 (2 marks):** Discuss various Data Link layer design issues.  \n**Answer:**\n- Error detection\n- Flow control\n\n**Q3 (5 marks):** Explain the concept of bandwidth and its impact on network performance.  \n**Answer:**\n- Bandwidth: maximum data transfer rate\n- Higher bandwidth: faster data transmission\n- Affects latency and throughput\n- Important for multimedia applications\n\n---\n\n### Network Performance Metrics (Weight: 7.5 | Band: HIGH)\n\n**Q1 (2 marks):** Calculate the time taken to transmit an image over different bandwidths.  \n**Answer:**\n- Time = Size / Bandwidth\n- Depends on image size and bandwidth\n\n**Q2 (2 marks):** Explain the concept of bandwidth and its impact on network performance.  \n**Answer:**\n- Bandwidth: data capacity\n- Higher bandwidth: improved performance\n\n**Q3 (5 marks):** Discuss the factors affecting network performance metrics.  \n**Answer:**\n- Latency: delay in data transmission\n- Throughput: actual data transfer rate\n- Jitter: variation in packet arrival time\n- Packet loss: data packets lost during transmission\n\n---\n\n### Network Classification (Weight: 6.5 | Band: MEDIUM)\n\n**Q1 (2 marks):** Classify networks based on geographical area (LAN, MAN, WAN).  \n**Answer:**\n- LAN: Local Area Network\n- MAN: Metropolitan Area Network\n- WAN: Wide Area Network\n\n**Q2 (2 marks):** Explain the characteristics of different types of networks.  \n**Answer:**\n- LAN: high speed, limited area\n- WAN: long distance, lower speed\n\n**Q3 (5 marks):** Discuss the advantages and disadvantages of LAN, MAN, and WAN.  \n**Answer:**\n- LAN: \n  - Advantages: high speed, low cost\n  - Disadvantages: limited range\n- MAN: \n  - Advantages: larger coverage, good speed\n  - Disadvantages: higher cost than LAN\n- WAN: \n  - Advantages: global reach\n  - Disadvantages: high latency, expensive\n\n---\n\n### Transmission Media (Weight: 5.0 | Band: MEDIUM)\n\n**Q1 (2 marks):** What are the key components of an optical transmission system?  \n**Answer:**\n- Optical fiber\n- Light source\n- Receiver\n\n**Q2 (2 marks):** State the advantages of optical fiber over coaxial cable.  \n**Answer:**\n- Higher bandwidth\n- Longer distance transmission\n\n**Q3 (5 marks):** Explain the types of transmission media used in networking.  \n**Answer:**\n- Twisted Pair: cost-effective, limited distance\n- Coaxial Cable: better shielding, moderate distance\n- Optical Fiber: high speed, long distance\n- Wireless: mobility, limited range",
+  "flashcards": "---\nTOPIC: Data Link Layer Protocols  \nFRONT: Explain the essential difference between circuit switching and packet switching.  \nBACK: Circuit switching establishes a dedicated path for the entire communication, while packet switching divides data into packets that are sent independently over the network.  \nMEMORY HOOK: Circuit is a dedicated path; Packet is a shared path.  \nDIFFICULTY: Medium  \nPYQ: 2023  \n---\n\n---\nTOPIC: Network Performance Metrics  \nFRONT: Calculate the time taken to transmit an image over different bandwidths.  \nBACK: Time = Size of the image (in bits) / Bandwidth (in bits per second).  \nMEMORY HOOK: Time = Size / Bandwidth  \nDIFFICULTY: Medium  \nPYQ: 2023  \n---",
+  "study_plan": "## Day 1\n- **Data Link Layer Protocols (Weight: 7.5)** - 2 hours\n  - Focus: Explain the essential difference between circuit switching and packet switching\n  - PYQ History: Previously asked in exam (2023)\n\n- **Network Performance Metrics (Weight: 7.5)** - 2 hours\n  - Focus: Calculate the time taken to transmit an image over different bandwidths\n  - PYQ History: Previously asked in exam (2023)\n\n## Day 2\n- **Network Classification (Weight: 6.5)** - 2 hours\n  - Focus: Classify networks based on geographical area (LAN, MAN, WAN)\n  - PYQ History: Previously asked in exam (2022)\n\n- **Network Protocols (Weight: 4.5)** - 2 hours\n  - Focus: Outline the principal difference between connectionless and connection-oriented communication\n  - PYQ History: Previously asked in exam (2023)\n\n## Day 3\n- **Transmission Media (Weight: 5.0)** - 2 hours\n  - Focus: What are the key components of an optical transmission system?\n  - PYQ History: Previously asked in exam (2023)\n\n## Day 4\n- **Revision** - 2 hours\n  - Review all topics and focus on previously asked questions.",
+  "cheatsheet": "## CRITICAL TOPICS\n\n### Network Classification (Weight: 6.5) * PYQ TOPIC *\n- **Key Definition**: Classify networks based on geographical area: \n  - **LAN**: Local Area Network\n  - **MAN**: Metropolitan Area Network\n  - **WAN**: Wide Area Network\n- **Memory Hook**: \"Local is Close, Metro is Medium, Wide is Far\"\n\n### Data Link Layer Protocols (Weight: 7.5) * PYQ TOPIC *\n- **Key Definition**: Circuit switching vs. packet switching:\n  - **Circuit Switching**: Dedicated path, constant bandwidth.\n  - **Packet Switching**: Data sent in packets, dynamic routing.\n- **Memory Hook**: \"Circuit is a Line, Packet is a Parcel\"\n\n### Transmission Media (Weight: 5.0) * PYQ TOPIC *\n- **Key Definition**: Key components of optical transmission system:\n  - **Components**: Light source, optical fiber, detector.\n- **Common Exam Trick**: Compare advantages of optical fiber over coaxial cable:\n  - Higher bandwidth, less attenuation, immune to electromagnetic interference.\n\n### Network Performance Metrics (Weight: 7.5) * PYQ TOPIC *\n- **Key Definition**: Bandwidth impact on performance:\n  - **Formula**: Time = Size / Bandwidth\n- **Memory Hook**: \"Bigger Bandwidth, Faster Transmission\"\n\n### Network Protocols (Weight: 4.5) * PYQ TOPIC *\n- **Key Definition**: Connectionless vs. connection-oriented:\n  - **Connectionless**: No established path (e.g., UDP).\n  - **Connection-oriented**: Established path (e.g., TCP).\n- **Common Exam Trick**: Always provide examples for both types.\n\n## WEAK TOPICS (Extra Focus)\n[No weak topics identified]"
 }

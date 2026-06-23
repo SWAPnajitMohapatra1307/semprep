@@ -2,6 +2,34 @@ import streamlit as st
 from .parser import parse_flashcard_text
 
 def render_flashcards(data, subject):
+    
+    st.markdown("""
+<style>
+
+/* Prev, Next, Flip buttons */
+.stButton > button {
+    color: #FFC000 !important;
+    border: 1px solid #FFC000 !important;
+    background-color: transparent !important;
+    font-weight: 600 !important;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.stButton > button:hover {
+    background-color: rgba(255, 192, 0, 0.1) !important;
+    color: #FFD54F !important;
+    border-color: #FFD54F !important;
+}
+
+/* Click effect */
+.stButton > button:active {
+    background-color: rgba(255, 192, 0, 0.2) !important;
+}
+
+</style>
+""", unsafe_allow_html=True)
     st.subheader("Interactive Flashcards")
 
     weighted_topics = data.get("weighted_topics", {})
@@ -71,8 +99,15 @@ def render_flashcards(data, subject):
 
     if not is_flipped:
         st.markdown(f"""
+                    
+        
         <div style='
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(
+    135deg,
+    rgba(18, 14, 2, 1) 0%,
+    rgba(45, 38, 12, 1) 50%,
+    rgba(18, 14, 2, 1) 100%
+);
             padding: 50px 40px;
             border-radius: 15px;
             text-align: center;
@@ -92,7 +127,12 @@ def render_flashcards(data, subject):
         back_text = card.get("back", "No answer available").replace("\n", "<br>")
         st.markdown(f"""
         <div style='
-            background: linear-gradient(135deg, #48bb78 0%, #276749 100%);
+                background: linear-gradient(
+                135deg,
+                rgba(5, 60, 20, 0.95) 0%,
+                rgba(15, 40, 25, 1) 50%,
+                rgba(5, 60, 20, 0.95) 100%
+            );
             padding: 50px 40px;
             border-radius: 15px;
             text-align: center;

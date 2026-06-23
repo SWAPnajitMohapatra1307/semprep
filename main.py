@@ -459,7 +459,7 @@ div[data-testid="stSpinner"] svg {
 st.markdown("""
 <div class="lambo-header">
     <h1><span>SEM</span>PREP</h1>
-    <div class="tagline">AI Powered Exam Preparation</div>
+    <div class="tagline">STOP SORTING START STUDYING</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -473,66 +473,61 @@ if "selected_subject" not in st.session_state:
 
 # ── SIDEBAR ──────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("""
-    <div class="lambo-sidebar-brand">
-        <h2>SEMPREP</h2>
-        <p>AI Exam Assistant</p>
+    st.markdown('<span class="section-label">Upload & Settings</span>', unsafe_allow_html=True)
+    uploaded_zip = st.file_uploader("Upload ZIP", type=["zip"], label_visibility="collapsed")
+    days_remaining = st.number_input("Days until exam", min_value=1, max_value=30, value=5)
+    force_rerun = st.checkbox("Force re-analysis")
+
+    if days_remaining <= 2:
+        mode = "CRISIS MODE"
+    elif days_remaining <= 5:
+        mode = "FAST MODE"
+    else:
+        mode = "SMART MODE"
+
+    st.markdown(f"""
+    <div style='margin: 12px 0;'>
+        <span class='section-label'>Current Mode</span>
+        <span class='priority-badge {"badge-critical" if days_remaining <= 2 else "badge-high" if days_remaining <= 5 else "badge-medium"}'>{mode}</span>
     </div>
     """, unsafe_allow_html=True)
-
-    st.subheader("Upload Notes")
-
-    uploaded_zip = st.file_uploader("Upload ZIP", type=["zip"])
-    days_remaining = st.number_input("Days until exam", min_value=1, max_value=30, value=5)
-    force_rerun   = st.checkbox("Force re-analysis")
-
-    st.markdown(
-        '<p class="lambo-hint">Upload notes &amp; PYQs to generate flashcards, cheat sheets &amp; study plans.</p>',
-        unsafe_allow_html=True,
-    )
 
     if uploaded_zip:
         temp_zip_path = "temp_uploaded.zip"
         with open(temp_zip_path, "wb") as f:
             f.write(uploaded_zip.read())
 
-        if st.button("Run Analysis", use_container_width=True, type="primary"):
-            with st.spinner("Analyzing..."):
+        if st.button("Run Analysis", use_container_width=True):
+            with st.spinner("Analyzing all subjects..."):
                 result = run_full_pipeline(temp_zip_path, days_remaining, force_rerun=force_rerun)
                 if result["status"] == "success":
                     st.session_state.current_results = result["results"]
-                    st.success("Done!")
+                    subjects_found = result.get("subjects_processed", [])
+                    st.success(f"Done. Found: {', '.join(subjects_found)}")
+                    if result.get("errors"):
+                        for subj, err in result["errors"].items():
+                            st.warning(f"{subj}: {err}")
                 else:
-                    st.error(result)
+                    st.error(result.get("error", "Something went wrong"))
 
-    st.divider()
-    st.subheader("Saved Subjects")
+    st.markdown('<hr style="border-color: #2a2a2a; margin: 20px 0;">', unsafe_allow_html=True)
+    st.markdown('<span class="section-label">Saved Subjects</span>', unsafe_allow_html=True)
 
     saved = list_saved_subjects()
-
-    st.markdown(f"""
-    <div class="lambo-dash-card">
-        <h4>Dashboard</h4>
-        <p>Subjects &nbsp;
-            <span class="dash-value">{len(saved)}</span>
-        </p>
-        <p>Days Left &nbsp;
-            <span class="dash-value">{days_remaining}</span>
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    for subj in saved:
-        if st.button(f"{subj}", use_container_width=True, type="primary"):
-            st.session_state.selected_subject = subj
+    if saved:
+        for subj in saved:
+            col_a, col_b = st.columns([3, 1])
+            if col_a.button(subj, use_container_width=True, key=f"saved_{subj}"):
+                st.session_state.selected_subject = subj
+    else:
+        st.markdown('<p style="color: #5a5a5a; font-size: 13px;">No saved subjects yet</p>', unsafe_allow_html=True)
 
 
 # ── AUTO-SELECT FIRST SUBJECT AFTER ANALYSIS ─────────────────────────────────
 if st.session_state.current_results:
     subjects = list(st.session_state.current_results.keys())
-    if subjects:
+    if subjects and st.session_state.selected_subject not in subjects:
         st.session_state.selected_subject = subjects[0]
-
 
 # ── MAIN CONTENT ─────────────────────────────────────────────────────────────
 if st.session_state.selected_subject:
