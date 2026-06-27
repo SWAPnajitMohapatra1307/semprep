@@ -1,18 +1,49 @@
+# Secrets — NEVER commit
+.env
+.env.local
+*.key
+lemma_config.json
+.lemma/
+.streamlit/secrets.toml
+
 # Virtual environment
 venv/
-.env
+env/
+ENV/
 
 # Python cache
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
 
-# OS files
+# Test files
+temp_uploaded.zip
+*.zip
+my_real*
+
+# Debug / dev scripts
+debug_*.py
+inspect_*.py
+test_pipeline.py
+cleanup_dupes.py
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
 .DS_Store
+Thumbs.db
+desktop.ini
 
-# SEMPREP generated data
-semprep_data/
-temp_extracted/
-outputs/
-
-# Debug files
-debugcheck.py
+# Streamlit
+.streamlit/
