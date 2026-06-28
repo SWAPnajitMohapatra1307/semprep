@@ -62,28 +62,38 @@ else:
 # ============================================================
 def get_client() -> Lemma:
     """
-    Authenticated root client.
-    Cloud mode:  uses LEMMA_ACCESS_TOKEN directly.
-    Local mode:  reads token from config.json file.
+    Authenticated root client with Auto-Refresh capability.
     """
+    refresh_token = os.getenv("LEMMA_REFRESH_TOKEN")
+
     if _USE_TOKEN_AUTH:
-        # Streamlit Cloud / any environment with token in env var
-        return Lemma(
-     token=LEMMA_ACCESS_TOKEN,
-     base_url=LEMMA_API_URL,
-     org_id=LEMMA_ORG_ID,
-     pod_id=LEMMA_POD_ID,
-     timeout=LEMMA_TIMEOUT,
-     )
+        # CLOUD MODE
+        client = Lemma(
+            token=LEMMA_ACCESS_TOKEN,
+            base_url=LEMMA_API_URL,
+            org_id=LEMMA_ORG_ID,
+            pod_id=LEMMA_POD_ID,
+            timeout=LEMMA_TIMEOUT,
+        )
+        
+        # If we have a refresh token, let the SDK handle auto-rotation
+        if refresh_token:
+            try:
+                # Check if current token is valid, if not, this triggers refresh
+                client.pods.list(limit=1) 
+            except LemmaAuthError:
+                # Manual refresh if SDK doesn't auto-rotate
+                client.auth.refresh(refresh_token=refresh_token)
+        
+        return client
     else:
-        # Local dev — reads from WSL or native CLI config file
+        # LOCAL MODE (WSL/Native config handles refresh itself)
         return Lemma(
             config_path=CONFIG_PATH,
             org_id=LEMMA_ORG_ID,
             pod_id=LEMMA_POD_ID,
             timeout=LEMMA_TIMEOUT,
         )
-
 
 def get_pod() -> Pod:
     """Pod-scoped client. Use for tables, agents, records, workflows."""
