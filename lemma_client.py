@@ -62,32 +62,43 @@ else:
 # ============================================================
 def get_client() -> Lemma:
     """
-    Authenticated root client with Auto-Refresh capability.
+    Authenticated root client.
+    Cloud mode: dynamically builds config.json so SDK handles refresh.
+    Local mode: uses existing config_path.
     """
-    refresh_token = os.getenv("LEMMA_REFRESH_TOKEN")
 
     if _USE_TOKEN_AUTH:
-        # CLOUD MODE
-        client = Lemma(
-            token=LEMMA_ACCESS_TOKEN,
-            base_url=LEMMA_API_URL,
+        # Build temporary config structure like real CLI config
+        temp_config = {
+            "active_server": "cloud",
+            "servers": {
+                "cloud": {
+                    "token": LEMMA_ACCESS_TOKEN,
+                    "refresh_token": os.getenv("LEMMA_REFRESH_TOKEN"),
+                    "base_url": LEMMA_API_URL,
+                    "defaults": {
+                        "org_id": LEMMA_ORG_ID,
+                        "pod_id": LEMMA_POD_ID,
+                    },
+                }
+            },
+        }
+
+        # Write to temp file
+        import tempfile, json
+        temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".json")
+        temp_file.write(json.dumps(temp_config).encode())
+        temp_file.close()
+
+        return Lemma(
+            config_path=temp_file.name,
             org_id=LEMMA_ORG_ID,
             pod_id=LEMMA_POD_ID,
             timeout=LEMMA_TIMEOUT,
         )
-        
-        # If we have a refresh token, let the SDK handle auto-rotation
-        if refresh_token:
-            try:
-                # Check if current token is valid, if not, this triggers refresh
-                client.pods.list(limit=1) 
-            except LemmaAuthError:
-                # Manual refresh if SDK doesn't auto-rotate
-                client.auth.refresh(refresh_token=refresh_token)
-        
-        return client
+
     else:
-        # LOCAL MODE (WSL/Native config handles refresh itself)
+        # Local mode
         return Lemma(
             config_path=CONFIG_PATH,
             org_id=LEMMA_ORG_ID,
