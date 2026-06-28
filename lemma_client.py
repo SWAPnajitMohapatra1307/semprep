@@ -63,27 +63,39 @@ def get_client() -> Lemma:
     config_json = os.getenv("LEMMA_CONFIG_JSON")
 
     if config_json:
-        # Cloud mode — write config JSON from env var to temp file
+        # Cloud mode
         tmp = tempfile.NamedTemporaryFile(
             delete=False, suffix=".json", mode="w", encoding="utf-8"
         )
         tmp.write(config_json)
         tmp.close()
-        return Lemma(
+        
+        client = Lemma(
             config_path=Path(tmp.name),
             org_id=LEMMA_ORG_ID,
             pod_id=LEMMA_POD_ID,
             timeout=LEMMA_TIMEOUT,
         )
+
+        # FORCE REFRESH TEST
+        try:
+            # Try a simple call to see if token is valid
+            client.pods.get(LEMMA_POD_ID)
+        except LemmaAuthError:
+            # If 401, force the SDK to use the refresh token
+            # This happens entirely in the background
+            try:
+                data = json.loads(config_json)
+                rf = data.get("servers", {}).get("cloud", {}).get("refresh_token")
+                if rf:
+                    client.auth.refresh(refresh_token=rf)
+            except:
+                pass
+        
+        return client
     else:
         # Local mode
-        return Lemma(
-            config_path=CONFIG_PATH,
-            org_id=LEMMA_ORG_ID,
-            pod_id=LEMMA_POD_ID,
-            timeout=LEMMA_TIMEOUT,
-        )
-
+        return Lemma(config_path=CONFIG_PATH, org_id=LEMMA_ORG_ID, pod_id=LEMMA_POD_ID)
 def get_pod() -> Pod:
     """Pod-scoped client. Use for tables, agents, records, workflows."""
     return get_client().pod(LEMMA_POD_ID)
