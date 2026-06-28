@@ -1,5 +1,8 @@
+@"
 streamlit
 python-dotenv
 pymupdf
 pytesseract
 lemma_sdk
+Pillow
+"@ | Out-File -FilePath "requirements.txt" -Encoding utf8

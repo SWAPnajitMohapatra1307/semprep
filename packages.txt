@@ -1,0 +1,5 @@
+@"
+tesseract-ocr
+tesseract-ocr-eng
+poppler-utils
+"@ | Out-File -FilePath "packages.txt" -Encoding utf8
