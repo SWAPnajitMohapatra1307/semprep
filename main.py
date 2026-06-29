@@ -1,10 +1,16 @@
+import os
+print("=" * 60)
+print("LEMMA_CONFIG_JSON present:", bool(os.getenv("LEMMA_CONFIG_JSON")))
+print("LEMMA_CONFIG_PATH present:", bool(os.getenv("LEMMA_CONFIG_PATH")))
+print("=" * 60)
+
 try:
     from dotenv import load_dotenv
     load_dotenv()
 except ImportError:
     pass
 
-import os
+
 import streamlit as st
 from workflows import run_full_pipeline, regenerate_cheatsheet_workflow, regenerate_study_plan_workflow
 from datastore import list_saved_subjects, load_subject_data, load_progress
